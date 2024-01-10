@@ -1,0 +1,59 @@
+header {
+  text-align: center;
+  background-color: #cf5af0;
+  font-family: calibri, gill sans, sans serif;
+  color: #f8ffa9;
+  font-size: 50px;
+  padding: 50px;
+}
+body {
+  text-align: center;
+  background-color: #cf5af0;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  font-size: larger;
+}
+#result {
+  text-align: center;
+  background-color: #16e446;
+  font-family: calibri, gill sans, sans serif;
+  color: black;
+  font-size: 20px;
+}
+
+game {
+  background-color: #ffffff;
+  font-family: Calibri, gill sans, sans serif;
+  color: rgb(5, 138, 38);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+#rock,
+#scissors,
+#paper {
+  width: 100px;
+  height: 50px;
+  border-radius: 12px;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255),
+    rgb(243, 52, 208)
+  );
+}
+#fire {
+  color: #f8ffa9;
+  width: 100px;
+  height: 50px;
+  border-radius: 12px;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255, 218, 70),
+    rgb(226, 0, 0)
+  );
+}

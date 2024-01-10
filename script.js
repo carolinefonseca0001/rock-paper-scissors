@@ -1,93 +1,78 @@
-console.log("Hello world!");
+let playerScore = 0;
+let computerScore = 0;
+const buttons = document.querySelectorAll("input");
 
-function getComputerChoice() {
-  let randomNumber = Math.floor(Math.random() * 3);
-  switch (randomNumber) {
-    case 0:
-      return "ROCK!";
-    case 1:
-      return "PAPER!";
-    case 2:
-      return "SCISSORS!";
+function computerPlay() {
+  let choices = ["ROCK", "PAPER", "SCISSORS"];
+  return choices[Math.floor(Math.random() * choices.length)];
+}
+
+function disableButtons() {
+  buttons.forEach((elem) => {
+    elem.disabled = true;
+  });
+}
+
+function playRound(playerSelection) {
+  let computerSelection = computerPlay();
+  let result = "";
+
+  if (
+    (playerSelection == "ROCK" && computerSelection == "SCISSORS") ||
+    (playerSelection == "SCISSORS" && computerSelection == "PAPER") ||
+    (playerSelection == "PAPER" && computerSelection == "ROCK") ||
+    (playerSelection == "FIRE" && computerSelection == "SCISSORS") ||
+    (playerSelection == "FIRE" && computerSelection == "PAPER") ||
+    (playerSelection == "FIRE" && computerSelection == "ROCK")
+  ) {
+    playerScore += 1;
+    result =
+      "You win this round! " +
+      playerSelection +
+      " beats " +
+      computerSelection +
+      "<br><br>Player score: " +
+      playerScore +
+      "<br>Computer score: " +
+      computerScore;
+
+    if (playerScore == 5) {
+      result += "<br><br>You won the game! Reload the page to play again";
+      disableButtons();
+    }
+  } else if (playerSelection == computerSelection) {
+    result =
+      "It's a tie. You both chose " +
+      playerSelection +
+      "<br><br>Player score: " +
+      playerScore +
+      "<br>Computer score: " +
+      computerScore;
+  } else {
+    computerScore += 1;
+    result =
+      "You lose! " +
+      computerSelection +
+      " beats " +
+      playerSelection +
+      "<br><br>Player score: " +
+      playerScore +
+      "<br>Computer score: " +
+      computerScore;
+
+    if (computerScore == 5) {
+      result +=
+        "<br><br>The robot won the game! Try some FIRE next time. Reload the page to play again";
+      disableButtons();
+    }
   }
+
+  document.getElementById("result").innerHTML = result;
+  return;
 }
 
-const computerSelection = getComputerChoice();
-let playerSelection = prompt("ROCK? PAPER? OR SCISSORS?");
-
-function playRound(playerSelection, compSelection) {
-  if (playerSelection === "ROCK!" && compSelection === "SCISSORS!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " You win!"
-    );
-  if (playerSelection === "ROCK!" && compSelection === "ROCK!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " It's a tie"
-    );
-  if (playerSelection === "ROCK!" && compSelection === "PAPER!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " The robot wins!"
-    );
-  if (playerSelection === "PAPER!" && compSelection === "ROCK!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " You win!"
-    );
-  if (playerSelection === "PAPER!" && compSelection === "PAPER!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " It's a tie"
-    );
-  if (playerSelection === "PAPER!" && compSelection === "SCISSORS!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " The robot wins!"
-    );
-  if (playerSelection === "SCISSORS!" && compSelection === "PAPER!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " You win!"
-    );
-  if (playerSelection === "SCISSORS!" && compSelection === "SCISSORS!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " It's a tie"
-    );
-  if (playerSelection === "SCISSORS!" && compSelection === "ROCK!")
-    return (
-      "You chose: " +
-      playerSelection +
-      " The robot chose: " +
-      compSelection +
-      " The robot wins!"
-    );
-}
-
-console.log(playRound(playerSelection, computerSelection));
+buttons.forEach((button) => {
+  button.addEventListener("click", function () {
+    playRound(button.value);
+  });
+});
